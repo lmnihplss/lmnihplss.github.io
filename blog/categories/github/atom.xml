@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: GitHub | 記憶にございません]]></title>
+  <link href="http://lmnihplss.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://lmnihplss.github.io/"/>
+  <updated>2013-11-25T02:21:56+09:00</updated>
+  <id>http://lmnihplss.github.io/</id>
+  <author>
+    <name><![CDATA[lmnihplss]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[GitHub のエラーはほっといたらダメ]]></title>
+    <link href="http://lmnihplss.github.io/blog/2013/11/25/post/"/>
+    <updated>2013-11-25T02:01:46+09:00</updated>
+    <id>http://lmnihplss.github.io/blog/2013/11/25/post</id>
+    <content type="html"><![CDATA[<p>おとといくらいに初めて記事を書いた GitHub Pages + Octopress ですが記事の編集しても全然反映されなくて
+今さっきイラついて、ブログごとまるっと再作成した。</p>
+
+<p>けどそれもなんか作成されないなーなんだろーなー怖いなーとか思ってたら GitHub アカウントが <strong>verify your email !!!</strong> 的な感じで怒られてるのに気がついた。</p>
+
+<p>知ってたけどさ。怒られてるの。ほっといたわけ。そしたら<a href="https://help.github.com/articles/pages-don-t-build-unable-to-run-jekyll#unverified-email-address">こんなこと</a>書いてあった。</p>
+
+<p>(^o^)／ ( *´Д⊂ ｸﾞｽﾝ…</p>
+
+<p>まさかですよホント。早く知りたかった・・・</p>
+
+<p>これからは GitHub 様に叱られてたら即日対応致します。</p>
+
+<p>はー。明日からまた１週間はじまるやー</p>
+
+<!-- more -->
+
+
+<hr />
+
+<p><em>そういえば新しく作り直したディレクトリ<code>rake</code>コマンドことごとく<code>bundle exec</code>つけろ言われてるな。なんでだろー</em></p>
+]]></content>
+  </entry>
+  
+</feed>
