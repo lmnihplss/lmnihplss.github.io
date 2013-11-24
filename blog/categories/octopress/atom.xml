@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | 記憶にございません]]></title>
+  <link href="http://lmnihplss.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://lmnihplss.github.io/"/>
+  <updated>2013-11-25T01:56:17+09:00</updated>
+  <id>http://lmnihplss.github.io/</id>
+  <author>
+    <name><![CDATA[lmnihplss]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress でブログ作成の手順]]></title>
+    <link href="http://lmnihplss.github.io/blog/2013/11/22/post/"/>
+    <updated>2013-11-22T01:37:49+09:00</updated>
+    <id>http://lmnihplss.github.io/blog/2013/11/22/post</id>
+    <content type="html"><![CDATA[<p>Bookmark の整理をしようと思い立ち、どうせなら勉強しながら情報残しつつ綺麗にしましょう、ということでブログを作ろうと思った。</p>
+
+<p>けど、今まで何回も作ってきたけど3日坊主どころか作ったきり pass 忘れて何も出来なくなるってのが4~5回くらい続いてたのでなんか面白くいやつないかな〜と色々調べたら良いもん見つけた。</p>
+
+<p> <!-- more --></p>
+
+<h2>Octopressとは</h2>
+
+<p>〜とは。とか書いたけど実際よくわかってない。うん。</p>
+
+<p>けど業務で GitHub(GitLab) 使ってたり Redmine 環境の設定とかに携わることがあって Ruby に興味を持ち始めてたところで出会えてよかった。(おととい作ったアメ○ロには二度とアクセスしないでしょう)</p>
+
+<p>前置きはこの辺にして作成手順書こ。</p>
+
+<h2>作業の流れ</h2>
+
+<p>今回行った作業の流れは</p>
+
+<ol>
+<li>GitHubでリポジトリ作成</li>
+<li>Octopress のソースを clone</li>
+<li>GitHub へデプロイするための設定</li>
+<li>記事作成</li>
+<li>テーマ変更</li>
+<li>記事のアップ</li>
+</ol>
+
+
+<p>的な流れ。</p>
+
+<h2>1. GitHubでリポジトリ作成</h2>
+
+<p>最初は GitHub にリポジトリを作る。すでに仕事で9ヶ月近く使ってたし特に問題はなかった。</p>
+
+<p>注意点挙げるとすればリポジトリ名を</p>
+
+<pre><code>username.github.io
+</code></pre>
+
+<p>とすることくらい。</p>
+
+<p>(ほんとは ssh key の重複で <strong>翌朝</strong>5:00 までごにょごにょしてたけどそれは別途記事書こう。。。)</p>
+
+<h2>2. Octopress のソースを clone</h2>
+
+<p>GitHub の Octopress リポジトリから最新のソースコードを Clone する。</p>
+
+<p><code>
+$ git clone git@github.com:imathis/octopress.git username.github.io
+</code></p>
+
+<h2>3. GitHub へデプロイするための設定</h2>
+
+<p>先ほど Clone した Octopress リポジトリで bundler をインストールして、用意されてる Gemfile から gem をインストールする。</p>
+
+<p><code>
+$ gem install bundler
+$ bundle install
+$ bundle exec rake install
+</code></p>
+
+<p>そして GitHub Pages のセットアップ。</p>
+
+<p><code>
+$ bundle exec rake setup_github_pages
+  Enter the read/write url for your repository:git@github.com:username/username.github.io.git
+</code></p>
+
+<h2>4. 記事作成</h2>
+
+<p>ここまでで一応ブログのセットアップは完成。(タイトルとか何も設定してないけどとりあえず記事書けるし)</p>
+
+<p>では記事を作ってみる。</p>
+
+<p><code>
+$ rake new_post['first post']
+</code></p>
+
+<p>そうすると <code>username.github.io/source/_posts/2013-11-22-first-post.markdown</code> みたいなファイルが出来る。</p>
+
+<p>これが記事ね。</p>
+
+<p>んで<code>'first post'</code> がブログのタイトルになるんだけどここには日本語入れちゃダメ。タイトルを日本語にしたいときは</p>
+
+<p>出来たファイルの中に書くんです。</p>
+
+<h2>```</h2>
+
+<p>layout: post
+title: &ldquo;Octopress でブログ作成の手順&rdquo;
+date: 2013-11-22 01:37:49 +0900
+comments: true</p>
+
+<h2>categories: [Octopress]</h2>
+
+<p>本文…
+```</p>
+
+<p>こんな感じ。</p>
+
+<p>layout とかはよくわからん。 cate は[cate1,cate2,…]とかすればいくらでも書けるみたい。</p>
+
+<p>本文は Markdown とか HTML とかで書ける。今回の記事はためしに Markdown を <a href="http://mouapp.com/" title="おしゃれエディタ">Mou</a> っていうおしゃれエディタで書いてます。</p>
+
+<h2>5. テーマ変更</h2>
+
+<p>ここは必須ではないテーマ変更。</p>
+
+<p>とりあえずいろいろな人がお勧めしている <a href="http://opthemes.com/" title="見やすいテーマのサイト">Octopress Themes</a> ってとこの</p>
+
+<p>これまた最近流行の <strong>Flat</strong> なデザイン <a href="https://github.com/alexgaribay/octoflat">Octoflat</a> を適用させました。</p>
+
+<p>コマンドは以下。</p>
+
+<p>```
+$ git clone git@github.com:bijumon/octoflat.git .themes/octoflat
+$ bundle exec rake install[&lsquo;octoflat&rsquo;]
+  A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]y</p>
+
+<p>$ bundle exec rake generate
+```</p>
+
+<h2>6. 記事のアップ</h2>
+
+<p>いよいよ作成した記事をアップする。(作成っていってもタイトルつけてテーマを既存のやつに変更しただけだけど)</p>
+
+<p>っとその前に、どんな表示になるか見たいわ！という他人の目を気にするような人は、以下のコマンドを実行すれば</p>
+
+<p> <code>http://localhost:4000/</code> とURL検索かければ静的ページとしてですが見れる。</p>
+
+<p><code>
+$ rake preview
+</code></p>
+
+<p>修正・preview を繰り返して思い残す事がなくなったらデプロイしましょう。</p>
+
+<p><code>
+$ rake gen_deploy
+</code></p>
+
+<p>これで記事がアップされる。実に簡単ヽ(*´∀`)/</p>
+
+<h2>終わりに</h2>
+
+<p>今回は、自分でデプロイする感じでブログの作成(大げさ)に加えて Markdown で記事書いたりしたのでめちゃくちゃ時間かかった。</p>
+
+<p>しかも、基本的な設定とかなんもしてないし。けど今までとは違ってなんか楽しくも感じる。最終的には続けられそうな気がしてる。</p>
+
+<p>がんばろ。</p>
+
+<h2>参考にさせていただいたサイト様たち</h2>
+
+<p><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/"><strong>OctopressでGitHub無料ブログ構築。sourceをBitbucket管理。簡単ガイド！</strong></a></p>
+]]></content>
+  </entry>
+  
+</feed>

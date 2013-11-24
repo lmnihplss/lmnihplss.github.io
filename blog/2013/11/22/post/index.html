@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress でブログ作成の手順 - 記憶にございません</title>
+  <meta name="author" content="lmnihplss">
+
+  
+  <meta name="description" content="Bookmark の整理をしようと思い立ち、どうせなら勉強しながら情報残しつつ綺麗にしましょう、ということでブログを作ろうと思った。 けど、今まで何回も作ってきたけど3日坊主どころか作ったきり pass 忘れて何も出来なくなるってのが4~5回くらい続いてたのでなんか面白くいやつないかな〜 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lmnihplss.github.io/blog/2013/11/22/post">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="記憶にございません" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">記憶にございません</a></h1>
+  
+    <h2>海馬的ブログ</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lmnihplss.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress でブログ作成の手順</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-22T01:37:49+09:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Bookmark の整理をしようと思い立ち、どうせなら勉強しながら情報残しつつ綺麗にしましょう、ということでブログを作ろうと思った。</p>
+
+<p>けど、今まで何回も作ってきたけど3日坊主どころか作ったきり pass 忘れて何も出来なくなるってのが4~5回くらい続いてたのでなんか面白くいやつないかな〜と色々調べたら良いもん見つけた。</p>
+
+<p> <!-- more --></p>
+
+<h2>Octopressとは</h2>
+
+<p>〜とは。とか書いたけど実際よくわかってない。うん。</p>
+
+<p>けど業務で GitHub(GitLab) 使ってたり Redmine 環境の設定とかに携わることがあって Ruby に興味を持ち始めてたところで出会えてよかった。(おととい作ったアメ○ロには二度とアクセスしないでしょう)</p>
+
+<p>前置きはこの辺にして作成手順書こ。</p>
+
+<h2>作業の流れ</h2>
+
+<p>今回行った作業の流れは</p>
+
+<ol>
+<li>GitHubでリポジトリ作成</li>
+<li>Octopress のソースを clone</li>
+<li>GitHub へデプロイするための設定</li>
+<li>記事作成</li>
+<li>テーマ変更</li>
+<li>記事のアップ</li>
+</ol>
+
+
+<p>的な流れ。</p>
+
+<h2>1. GitHubでリポジトリ作成</h2>
+
+<p>最初は GitHub にリポジトリを作る。すでに仕事で9ヶ月近く使ってたし特に問題はなかった。</p>
+
+<p>注意点挙げるとすればリポジトリ名を</p>
+
+<pre><code>username.github.io
+</code></pre>
+
+<p>とすることくらい。</p>
+
+<p>(ほんとは ssh key の重複で <strong>翌朝</strong>5:00 までごにょごにょしてたけどそれは別途記事書こう。。。)</p>
+
+<h2>2. Octopress のソースを clone</h2>
+
+<p>GitHub の Octopress リポジトリから最新のソースコードを Clone する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:imathis/octopress.git username.github.io</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. GitHub へデプロイするための設定</h2>
+
+<p>先ほど Clone した Octopress リポジトリで bundler をインストールして、用意されてる Gemfile から gem をインストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install bundler
+</span><span class='line'>$ bundle install
+</span><span class='line'>$ bundle exec rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そして GitHub Pages のセットアップ。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle exec rake setup_github_pages
+</span><span class='line'>  Enter the read/write url for your repository:git@github.com:username/username.github.io.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. 記事作成</h2>
+
+<p>ここまでで一応ブログのセットアップは完成。(タイトルとか何も設定してないけどとりあえず記事書けるし)</p>
+
+<p>では記事を作ってみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_post['first post']</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そうすると <code>username.github.io/source/_posts/2013-11-22-first-post.markdown</code> みたいなファイルが出来る。</p>
+
+<p>これが記事ね。</p>
+
+<p>んで<code>'first post'</code> がブログのタイトルになるんだけどここには日本語入れちゃダメ。タイトルを日本語にしたいときは</p>
+
+<p>出来たファイルの中に書くんです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "Octopress でブログ作成の手順"
+</span><span class='line'>date: 2013-11-22 01:37:49 +0900
+</span><span class='line'>comments: true
+</span><span class='line'>categories: [Octopress]
+</span><span class='line'>---
+</span><span class='line'>本文…</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じ。</p>
+
+<p>layout とかはよくわからん。 cate は[cate1,cate2,…]とかすればいくらでも書けるみたい。</p>
+
+<p>本文は Markdown とか HTML とかで書ける。今回の記事はためしに Markdown を <a href="http://mouapp.com/" title="おしゃれエディタ">Mou</a> っていうおしゃれエディタで書いてます。</p>
+
+<h2>5. テーマ変更</h2>
+
+<p>ここは必須ではないテーマ変更。</p>
+
+<p>とりあえずいろいろな人がお勧めしている <a href="http://opthemes.com/" title="見やすいテーマのサイト">Octopress Themes</a> ってとこの</p>
+
+<p>これまた最近流行の <strong>Flat</strong> なデザイン <a href="https://github.com/alexgaribay/octoflat">Octoflat</a> を適用させました。</p>
+
+<p>コマンドは以下。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:bijumon/octoflat.git .themes/octoflat
+</span><span class='line'>$ bundle exec rake install['octoflat']
+</span><span class='line'>  A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]y
+</span><span class='line'>
+</span><span class='line'>$ bundle exec rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>6. 記事のアップ</h2>
+
+<p>いよいよ作成した記事をアップする。(作成っていってもタイトルつけてテーマを既存のやつに変更しただけだけど)</p>
+
+<p>っとその前に、どんな表示になるか見たいわ！という他人の目を気にするような人は、以下のコマンドを実行すれば</p>
+
+<p> <code>http://localhost:4000/</code> とURL検索かければ静的ページとしてですが見れる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修正・preview を繰り返して思い残す事がなくなったらデプロイしましょう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで記事がアップされる。実に簡単ヽ(*´∀`)/</p>
+
+<h2>終わりに</h2>
+
+<p>今回は、自分でデプロイする感じでブログの作成(大げさ)に加えて Markdown で記事書いたりしたのでめちゃくちゃ時間かかった。</p>
+
+<p>しかも、基本的な設定とかなんもしてないし。けど今までとは違ってなんか楽しくも感じる。最終的には続けられそうな気がしてる。</p>
+
+<p>がんばろ。</p>
+
+<h2>参考にさせていただいたサイト様たち</h2>
+
+<p><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/"><strong>OctopressでGitHub無料ブログ構築。sourceをBitbucket管理。簡単ガイド！</strong></a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">lmnihplss</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-22T01:37:49+09:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://lmnihplss.github.io/blog/2013/11/22/post/" data-via="" data-counturl="http://lmnihplss.github.io/blog/2013/11/22/post/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/22/post/">Octopress でブログ作成の手順</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - lmnihplss -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
