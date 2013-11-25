@@ -4,7 +4,7 @@
   <title><![CDATA[記憶にございません]]></title>
   <link href="http://lmnihplss.github.io/atom.xml" rel="self"/>
   <link href="http://lmnihplss.github.io/"/>
-  <updated>2013-11-25T02:21:56+09:00</updated>
+  <updated>2013-11-25T23:18:04+09:00</updated>
   <id>http://lmnihplss.github.io/</id>
   <author>
     <name><![CDATA[lmnihplss]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一つのホスティングサービスに対して複数の SSH Key を利用する]]></title>
+    <link href="http://lmnihplss.github.io/blog/2013/11/25/post2/"/>
+    <updated>2013-11-25T22:26:39+09:00</updated>
+    <id>http://lmnihplss.github.io/blog/2013/11/25/post2</id>
+    <content type="html"><![CDATA[<p>このブログを作るときに GitHub Pages 用とブログのソース管理用に Bitbucket にアカウントとリポジトリを作成した際に、
+既に持っていたアカウントと SSH Key が邪魔して新しく作ったやつがすんなり動作しなかったのでそのときの解決法?（まだ試してないけど）をメモ。</p>
+
+<!-- more -->
+
+
+<p>まずはそのときにメモってたもの。（月曜の朝5時すぎだったので早く寝なきゃと疲れで言葉めちゃくちゃ）</p>
+
+<p>bitbucket で push しようとしたら以下のエラー。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>conq: repository access denied.
+</span><span class='line'>fatal: The remote end hung up unexpectedly</span></code></pre></td></tr></table></div></figure>
+
+
+<p>んで <code>$ ssh -T git@bitbucket.org</code> すると</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>logged in as &lt;other username&gt;.
+</span><span class='line'>You can use git or hg to connect to Bitbucket. Shell access is disabled.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>んー、それはもう一個のアカウント名なんだよなー。</p>
+
+<p>それで、<code>~/.ssh/config</code> を修正する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host bitbucket.org
+</span><span class='line'>  User &lt;other username&gt;
+</span><span class='line'>  Hostname bitbucket.org
+</span><span class='line'>  IdentityFile &lt;rsa key path&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>から</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host bitbucket.org
+</span><span class='line'>  Hostname bitbucket.org
+</span><span class='line'>  IdentitiesOnly  true
+</span><span class='line'>  IdentityFile &lt;rsa key path&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でもだめ。(#ﾟДﾟ)</p>
+
+<p>次。こうする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host bitbucket.org
+</span><span class='line'>  User &lt;username&gt;
+</span><span class='line'>  Hostname bitbucket.org
+</span><span class='line'>  IdentityFile &lt;rsa key path&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でもだめ。そういえば GitHub は SSH Key アカウントにひもづけたなー。と思い、鍵を新規作成・bitbucketに追加・<code>~/.ssh/config</code> に設定追加
+とかしたけどだめだった。</p>
+
+<p>結局 <code>~/.ssh/config</code> と <code>$ ssh-add</code> を既存のアカウントのものより今回作ったものを上に書くようにしてconfig に  <code>IdentitiesOnly yes</code> っていれたら動いた。（<code>logged in as &lt;username&gt;.</code>って出てくれた)</p>
+
+<p>原因わからん。てゆーか ssh の設定読み込む順序で決まんのか？</p>
+
+<p>んでこの後結局、GitHub もうまくいかなくてこっちは <code>~/.gitconfig</code>と<code>~/.ssh/config</code> から元々あったアカウントの情報消した。</p>
+
+<p>以上。ここまで</p>
+
+<hr />
+
+<p>上が今から2日前くらいのこと。ホントあほだったー。<strong>詰まったらいったんやめる。</strong>っていうのは大切。</p>
+
+<p>今考えれば <code>~/.gitconfig</code> には既存のアカウントの情報があって（GitHub だけ。Bitbucket はわからん） Octopress 用のリポジトリには特に設定してなかったから <code>--global</code> の情報が使われてたはず。
+だから、このリポジトリ用に config を設定してやればよかった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config user.email "use email"
+</span><span class='line'>git config user.name "use name"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これね。んで<code>git config -l</code>してやればどんな値が使われてるかわかるし。ssh config あってたじゃんか。</p>
+
+<p>時間があったら再設定してみよ。</p>
+
+<h2>参考にさせていただいたサイト様たち</h2>
+
+<p><a href="http://transitive.info/article/git/command/config/"><strong>transitive.info 【git config 使い方】</strong></a></p>
+
+<p><a href="http://cflat-inc.hatenablog.com/entry/20130311/1362955659"><strong>株式会社CFlatの明後日スタイルのブログ【BitbucketにSSHでアクセスする（複数アカウントもおっけー）】</strong></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[GitHub のエラーはほっといたらダメ]]></title>

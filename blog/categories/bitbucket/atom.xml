@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: GitHub | 記憶にございません]]></title>
-  <link href="http://lmnihplss.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Bitbucket | 記憶にございません]]></title>
+  <link href="http://lmnihplss.github.io/blog/categories/bitbucket/atom.xml" rel="self"/>
   <link href="http://lmnihplss.github.io/"/>
   <updated>2013-11-25T23:18:04+09:00</updated>
   <id>http://lmnihplss.github.io/</id>
@@ -100,35 +100,6 @@ git config user.name "use name"
 <p><a href="http://transitive.info/article/git/command/config/"><strong>transitive.info 【git config 使い方】</strong></a></p>
 
 <p><a href="http://cflat-inc.hatenablog.com/entry/20130311/1362955659"><strong>株式会社CFlatの明後日スタイルのブログ【BitbucketにSSHでアクセスする（複数アカウントもおっけー）】</strong></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GitHub のエラーはほっといたらダメ]]></title>
-    <link href="http://lmnihplss.github.io/blog/2013/11/25/post/"/>
-    <updated>2013-11-25T02:01:46+09:00</updated>
-    <id>http://lmnihplss.github.io/blog/2013/11/25/post</id>
-    <content type="html"><![CDATA[<p>おとといくらいに初めて記事を書いた GitHub Pages + Octopress ですが記事の編集しても全然反映されなくて
-今さっきイラついて、ブログごとまるっと再作成した。</p>
-
-<p>けどそれもなんか作成されないなーなんだろーなー怖いなーとか思ってたら GitHub アカウントが <strong>verify your email !!!</strong> 的な感じで怒られてるのに気がついた。</p>
-
-<p>知ってたけどさ。怒られてるの。ほっといたわけ。そしたら<a href="https://help.github.com/articles/pages-don-t-build-unable-to-run-jekyll#unverified-email-address">こんなこと</a>書いてあった。</p>
-
-<p>(^o^)／ ( *´Д⊂ ｸﾞｽﾝ…</p>
-
-<p>まさかですよホント。早く知りたかった・・・</p>
-
-<p>これからは GitHub 様に叱られてたら即日対応致します。</p>
-
-<p>はー。明日からまた１週間はじまるやー</p>
-
-<!-- more -->
-
-
-<hr />
-
-<p><em>そういえば新しく作り直したディレクトリ<code>rake</code>コマンドことごとく<code>bundle exec</code>つけろ言われてるな。なんでだろー</em></p>
 ]]></content>
   </entry>
   
