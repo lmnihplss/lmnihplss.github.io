@@ -4,7 +4,7 @@
   <title><![CDATA[記憶にございません]]></title>
   <link href="http://lmnihplss.github.io/atom.xml" rel="self"/>
   <link href="http://lmnihplss.github.io/"/>
-  <updated>2013-11-26T01:20:45+09:00</updated>
+  <updated>2013-11-26T01:22:42+09:00</updated>
   <id>http://lmnihplss.github.io/</id>
   <author>
     <name><![CDATA[lmnihplss]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress Tips1]]></title>
-    <link href="http://lmnihplss.github.io/blog/2013/11/25/post3/"/>
-    <updated>2013-11-25T23:52:15+09:00</updated>
-    <id>http://lmnihplss.github.io/blog/2013/11/25/post3</id>
+    <link href="http://lmnihplss.github.io/blog/2013/11/26/post3/"/>
+    <updated>2013-11-26T01:22:33+09:00</updated>
+    <id>http://lmnihplss.github.io/blog/2013/11/26/post3</id>
     <content type="html"><![CDATA[<p>Octopress の設定や tips などについて目についたものをまとめる。</p>
 
 <!-- more -->
