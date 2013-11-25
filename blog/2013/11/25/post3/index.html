@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress Tips1 - 記憶にございません</title>
+  <meta name="author" content="lmnihplss">
+
+  
+  <meta name="description" content="Octopress の設定や tips などについて目についたものをまとめる。 下書きを deploy しないようにする 記事の yaml 部分に以下を追記。 published: false preview で反映はされるが deploy されないようになる。 meta &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lmnihplss.github.io/blog/2013/11/25/post3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="記憶にございません" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">記憶にございません</a></h1>
+  
+    <h2>海馬的ブログ</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lmnihplss.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress Tips1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-25T23:52:15+09:00" pubdate data-updated="true">2013/11/25 23:52:15</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Octopress の設定や tips などについて目についたものをまとめる。</p>
+
+<!-- more -->
+
+
+<h2>下書きを deploy しないようにする</h2>
+
+<p>記事の yaml 部分に以下を追記。</p>
+
+<pre><code>published: false
+</code></pre>
+
+<p>preview で反映はされるが deploy されないようになる。</p>
+
+<h2>meta descriptionの追加</h2>
+
+<p>Rakefile の L.106 に <code>rake new_post["post"]</code> したときのテンプレが書かれているので、ここを修正すればデフォルトで設定を追加できる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  puts "Creating new post: #{filename}"
+</span><span class='line'>  open(filename, 'w') do |post|
+</span><span class='line'>    post.puts "---"
+</span><span class='line'>    post.puts "layout: post"
+</span><span class='line'>    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
+</span><span class='line'>    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+</span><span class='line'>    post.puts "comments: true"
+</span><span class='line'>    post.puts "categories: "
+</span><span class='line'>    post.puts "published: false"
+</span><span class='line'>    post.puts "---"
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>キャッシュを削除する（要検証・調査）</h2>
+
+<p>以下の二つ。</p>
+
+<pre><code>&amp; rake clean
+&amp; git gc
+</code></pre>
+
+<p>なんか不具合でうまく動かないとか書かれてたので検証と調査を行うこと。てか <code>git gc</code>とかなんかすげーコマンドだわ (0ﾟ･∀･)</p>
+
+<h2>プロフィール・カテゴリ・タグクラウドを表示する</h2>
+
+<p>最近の投稿がデフォルトで表示されているサイドバーにプロフィール・カテゴリ・タグクラウドを表示する。</p>
+
+<h3>プロフィール</h3>
+
+<p>デフォルトで用意されている <code>about.html</code> を編集すれば簡単なものだけどすぐ表示できる。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/about.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;p&gt;</span>A little something about me.<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>カテゴリ・タグクラウド</h3>
+
+<p>カテゴリとタグクラウドを表示するには、<a href="https://github.com/tokkonopapa/octopress-tagcloud">octopress-tagcloud</a>を使う。
+リンクからソースをダウンロードし、 <code>plugins/</code> 以下に <code>tag_cloud.rb</code> を、<code>source/_includes/custom/asides/</code> 以下に<code>category_list.html</code> と <code>tag_cloud.html</code> を置く。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/category_list.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;category-list&quot;</span><span class="nt">&gt;</span>{% category_list counter:true %}<span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/tag_cloud.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Tag Cloud<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;tag-cloud&quot;</span><span class="nt">&gt;</span>{% tag_cloud counter:true %}<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみに、普通のコードブロックで上の {%  %} のような Octopress のスニペットは変換されるが以下のようにする事で回避可能。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{%  codeblock %}
+</span><span class='line'>{%  raw %}
+</span><span class='line'>...
+</span><span class='line'>{%  endraw %}
+</span><span class='line'>{%  endcodeblock %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>少し脱線しましたが、ファイルの移動が完了したら最後に <code>_config.yml</code> の default_asides の行に追加してやるだけ。</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">...</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/category_list.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/tag_cloud.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/about.html</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>参考にさせていただいたサイト様たち</h2>
+
+<p><a href="http://rcmdnk.github.io/blog/2013/03/07/setup-octopress/"><strong>rcmdnk&rsquo;s blog【GitHub pages + Octopressの導入】</strong></a></p>
+
+<p><a href="http://rcmdnk.github.io/blog/2013/05/05/blog-octopress/"><strong>rcmdnk&rsquo;s blog【Octopressでのコードの表示やコメントのあれこれ】</strong></a></p>
+
+<p><a href="http://tantant.jp/blog/Octopress/configuring-octopress/#paragraph09"><strong>tantant【Octopressの初期設定時に気にしておきたい9箇所】</strong></a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">lmnihplss</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-25T23:52:15+09:00" pubdate data-updated="true">2013/11/25 23:52:15</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://lmnihplss.github.io/blog/2013/11/25/post3/" data-via="" data-counturl="http://lmnihplss.github.io/blog/2013/11/25/post3/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/25/post2/" title="Previous Post: 一つのホスティングサービスに対して複数の SSH Key を利用する">&laquo; 一つのホスティングサービスに対して複数の SSH Key を利用する</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/25/post3/">Octopress Tips1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/25/post2/">一つのホスティングサービスに対して複数の SSH Key を利用する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/25/post/">GitHub のエラーはほっといたらダメ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/22/post/">Octopress でブログ作成の手順</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/bitbucket/'>Bitbucket (1)</a></li><li><a href='/blog/categories/github/'>GitHub (2)</a></li><li><a href='/blog/categories/octopress/'>Octopress (4)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/bitbucket' style='font-size: 115.0%'>Bitbucket(1)</a> <a href='/blog/categories/github' style='font-size: 130.0%'>GitHub(2)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(4)</a> </span>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>A little something about me.</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - lmnihplss -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

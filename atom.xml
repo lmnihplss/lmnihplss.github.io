@@ -4,7 +4,7 @@
   <title><![CDATA[記憶にございません]]></title>
   <link href="http://lmnihplss.github.io/atom.xml" rel="self"/>
   <link href="http://lmnihplss.github.io/"/>
-  <updated>2013-11-25T23:18:04+09:00</updated>
+  <updated>2013-11-26T01:20:45+09:00</updated>
   <id>http://lmnihplss.github.io/</id>
   <author>
     <name><![CDATA[lmnihplss]]></name>
@@ -12,6 +12,146 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Tips1]]></title>
+    <link href="http://lmnihplss.github.io/blog/2013/11/25/post3/"/>
+    <updated>2013-11-25T23:52:15+09:00</updated>
+    <id>http://lmnihplss.github.io/blog/2013/11/25/post3</id>
+    <content type="html"><![CDATA[<p>Octopress の設定や tips などについて目についたものをまとめる。</p>
+
+<!-- more -->
+
+
+<h2>下書きを deploy しないようにする</h2>
+
+<p>記事の yaml 部分に以下を追記。</p>
+
+<pre><code>published: false
+</code></pre>
+
+<p>preview で反映はされるが deploy されないようになる。</p>
+
+<h2>meta descriptionの追加</h2>
+
+<p>Rakefile の L.106 に <code>rake new_post["post"]</code> したときのテンプレが書かれているので、ここを修正すればデフォルトで設定を追加できる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  puts "Creating new post: #{filename}"
+</span><span class='line'>  open(filename, 'w') do |post|
+</span><span class='line'>    post.puts "---"
+</span><span class='line'>    post.puts "layout: post"
+</span><span class='line'>    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
+</span><span class='line'>    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+</span><span class='line'>    post.puts "comments: true"
+</span><span class='line'>    post.puts "categories: "
+</span><span class='line'>    post.puts "published: false"
+</span><span class='line'>    post.puts "---"
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>キャッシュを削除する（要検証・調査）</h2>
+
+<p>以下の二つ。</p>
+
+<pre><code>&amp; rake clean
+&amp; git gc
+</code></pre>
+
+<p>なんか不具合でうまく動かないとか書かれてたので検証と調査を行うこと。てか <code>git gc</code>とかなんかすげーコマンドだわ (0ﾟ･∀･)</p>
+
+<h2>プロフィール・カテゴリ・タグクラウドを表示する</h2>
+
+<p>最近の投稿がデフォルトで表示されているサイドバーにプロフィール・カテゴリ・タグクラウドを表示する。</p>
+
+<h3>プロフィール</h3>
+
+<p>デフォルトで用意されている <code>about.html</code> を編集すれば簡単なものだけどすぐ表示できる。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/about.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;p&gt;</span>A little something about me.<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>カテゴリ・タグクラウド</h3>
+
+<p>カテゴリとタグクラウドを表示するには、<a href="https://github.com/tokkonopapa/octopress-tagcloud">octopress-tagcloud</a>を使う。
+リンクからソースをダウンロードし、 <code>plugins/</code> 以下に <code>tag_cloud.rb</code> を、<code>source/_includes/custom/asides/</code> 以下に<code>category_list.html</code> と <code>tag_cloud.html</code> を置く。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/category_list.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;category-list&quot;</span><span class="nt">&gt;</span>{% category_list counter:true %}<span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/tag_cloud.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Tag Cloud<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;tag-cloud&quot;</span><span class="nt">&gt;</span>{% tag_cloud counter:true %}<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみに、普通のコードブロックで上の {%  %} のような Octopress のスニペットは変換されるが以下のようにする事で回避可能。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{%  codeblock %}
+</span><span class='line'>{%  raw %}
+</span><span class='line'>...
+</span><span class='line'>{%  endraw %}
+</span><span class='line'>{%  endcodeblock %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>少し脱線しましたが、ファイルの移動が完了したら最後に <code>_config.yml</code> の default_asides の行に追加してやるだけ。</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">...</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/category_list.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/tag_cloud.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/about.html</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>参考にさせていただいたサイト様たち</h2>
+
+<p><a href="http://rcmdnk.github.io/blog/2013/03/07/setup-octopress/"><strong>rcmdnk&rsquo;s blog【GitHub pages + Octopressの導入】</strong></a></p>
+
+<p><a href="http://rcmdnk.github.io/blog/2013/05/05/blog-octopress/"><strong>rcmdnk&rsquo;s blog【Octopressでのコードの表示やコメントのあれこれ】</strong></a></p>
+
+<p><a href="http://tantant.jp/blog/Octopress/configuring-octopress/#paragraph09"><strong>tantant【Octopressの初期設定時に気にしておきたい9箇所】</strong></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一つのホスティングサービスに対して複数の SSH Key を利用する]]></title>
