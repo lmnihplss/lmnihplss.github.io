@@ -4,7 +4,7 @@
   <title><![CDATA[記憶にございません]]></title>
   <link href="http://lmnihplss.github.io/atom.xml" rel="self"/>
   <link href="http://lmnihplss.github.io/"/>
-  <updated>2013-11-26T01:24:30+09:00</updated>
+  <updated>2013-11-27T01:52:11+09:00</updated>
   <id>http://lmnihplss.github.io/</id>
   <author>
     <name><![CDATA[lmnihplss]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UICollectionView Part.1]]></title>
+    <link href="http://lmnihplss.github.io/blog/2013/11/27/post/"/>
+    <updated>2013-11-27T00:59:27+09:00</updated>
+    <id>http://lmnihplss.github.io/blog/2013/11/27/post</id>
+    <content type="html"><![CDATA[<p>今 iPhone アプリを作ろうとして色々案を考えてるが、とりあえず個人目標にかなりプラス出来るものを作る事にした。
+それで大体の構成は考えたので設計など実際の開発を始める前に、使用する予定の View とかを調査し始める。とりあえず手動かさないとやる気でないもんヽ(`Д´)ﾉ  <br/>
+完成は遅くても年明けくらいに出来れば十分だな。</p>
+
+<p>今回は <strong>UICollectionView</strong> について。</p>
+
+<!-- more -->
+
+
+<h2>とりあえずいじる</h2>
+
+<p>とりあえず <code>UICollectionView</code> は今まで一回も触った事無かったのでとりあえずサンプルでいじってみる。(ほぼ参考サイト様の通りにやっただけだけど)</p>
+
+<p>具体的な実装に関しては省略。  <br/>
+<code>UITableView</code> にかなり近くてこっちは煽りまっくてるので特にメモることもない。（今のとこ）
+簡単な流れとしては、</p>
+
+<ol>
+<li>表示するセルのデータ(モデル)を作成。(別にサンプルとかセルのコンテンツが簡単なら作らなくていい)</li>
+<li><code>UICollectionViewCell</code> クラスのカスタム。xib でレイアウト作ったりして public な Outlet とかにしとく。</li>
+<li>ViewController に <code>UICollectionViewDataSource</code>と<code>UICollectionViewDelegate</code>のプロトコルをセットして(この表現あってるのか？) Delegate を実装する。</li>
+</ol>
+
+
+<p>といった感じ。<code>UITableView</code> とちょっと違うかな？と思ったところは</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span> <span class="nl">registerNib:</span><span class="n">nib</span> <span class="nl">forCellWithReuseIdentifier:</span><span class="s">@&quot;Cell&quot;</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいに <code>viewDidLoad</code>で register？するとこ。ここはどんな動作してるか調べたいなー。</p>
+
+<p>今回作成したサンプルは <a href="https://github.com/lmnihplss/Samples/tree/master/UICollectionViewSample">GitHub</a> にあげた。</p>
+
+<h2>参考にさせていただいたサイト様たち</h2>
+
+<p><a href="http://blogios.stack3.net/archives/883"><strong>Cyber Passion for iOS【UICollectionView その1 セルの表示】</strong></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress Tips1]]></title>
